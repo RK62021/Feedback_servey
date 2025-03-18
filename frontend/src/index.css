@@ -1,1 +1,20 @@
 @import "tailwindcss";
+
+ 
+@layer utilities {
+    .bg-custom-color {
+        background-color: #3490dc;
+    }
+    .text-custom-color {
+        color: white;
+    }
+    .bg-primary {
+        background-color: #212529;
+    }
+    .text-primary {
+        color:#99A1AF;
+    }
+    .border-primary {
+        border-color: #99A1AF;
+    }
+}
