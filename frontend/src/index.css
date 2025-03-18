@@ -1,5 +1,6 @@
 @import "tailwindcss";
 
+
  
 @layer utilities {
     .bg-custom-color {
@@ -16,5 +17,8 @@
     }
     .border-primary {
         border-color: #99A1AF;
+    }
+    .font-f{
+        font-family: "Inter", sans-serif;
     }
 }
