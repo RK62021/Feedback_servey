@@ -9,7 +9,7 @@ const signupValidation = (req, res, next) => {
         })
         const { error } = schema.validate(req.body);
         if(error){
-           throw new Error(400, "Validation Error", error.details);
+           return next(new Error(400, error.details[0].message));
           
         }
         next();
