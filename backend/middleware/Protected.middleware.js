@@ -6,13 +6,15 @@ const verifyJwt = asynchandler(async (req, _, next) => {
   try {
     const token = req.cookies?.accessToken;
     if (!token) {
-      throw new Error(401, "Unauthorized");
+      console.log("Token not found");
+      return next(new Error(401, "Unauthorized You are not Valid User"));
     }
     jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
       if (err) {
-        throw new Error(401, "Unauthorized");
+        return next(new Error(401, "Unauthorized You are not Valid User"));
       }
       req.user = user;
+      
       next();
     });
   } catch (error) {

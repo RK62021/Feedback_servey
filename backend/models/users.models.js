@@ -37,7 +37,7 @@ UserSchema.methods.generateAccessToken= async function(){
         id: this._id,
         email: this.email,
         name: this.name
-    }, process.env.JWT_SECRET, {expiresIn: '10m'});
+    }, process.env.JWT_SECRET, {expiresIn: '1d'});
     return token;
 };
 UserSchema.methods.generateRefreshToken= async function(){

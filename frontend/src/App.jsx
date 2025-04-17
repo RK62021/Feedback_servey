@@ -1,5 +1,5 @@
-import Footer from "./components/footer"
-import Header from "./components/header"
+import Footer from "./components/Footer"
+import Header from "./components/Header"
 import {Outlet} from "react-router-dom"
 
 function App() {
@@ -14,4 +14,4 @@ function App() {
   )
 }
 
-export default App
+export default App;

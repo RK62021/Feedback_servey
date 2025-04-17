@@ -6,9 +6,8 @@ import cors from "cors";
 const app = express();
 app.use(
   cors({
-    origin: process.env.CORS_ORIGIN,
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],  // Allow specific HTTP methods (optional)
-  credentials: true, // Allow cookies to be sent to the frontend (optional)
+    origin: "http://localhost:5173", // Allow specific HTTP methods (optional)
+    credentials: true, // Allow cookies to be sent to the frontend (optional)
   })
 );
 
@@ -17,7 +16,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 import { Auth_routes } from "../routes/Auth_routes.js";
+import { Servey_routes } from "../routes/Servey_routes.js";
+import { Dashboard_routes } from "../routes/Dasboard_routes.js";
 app.use("/api/v1/auth", Auth_routes);
+app.use("/api/v1/Serveys", Servey_routes);
+app.use("/api/v1/profile", Dashboard_routes);
+
+
 app.use(errorHandler);
 
 export { app };

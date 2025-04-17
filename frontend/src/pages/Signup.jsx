@@ -33,7 +33,6 @@ function Signup() {
           { autoClose: 2000,
             position: "top-center",
             
-            
            }
         );
         reset(); // Reset form after successful submission

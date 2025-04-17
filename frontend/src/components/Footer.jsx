@@ -1,4 +1,5 @@
 import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 function Footer() {
   return (
@@ -7,10 +8,10 @@ function Footer() {
         <div className=" flex ml-[15px] mt-[20px] w-full  sm:flex-row flex-col justify-between">
           <div className="grid grid-cols-3 lg:w-[50%] md:w-[50%] w-full  p-4  flex-2">
             <div className=" justify-start flex-col pl-[15px]">
-              <h1 className=" text-custom-color  pb-4 text-lg">Section</h1>
+              <h1 className=" text-custom-color  pb-4 text-lg">Sections</h1>
               <ul className=" flex flex-col space-y-2">
-                <li>Home</li>
-                <li>About</li>
+                <Link to="/" className="hover:text-lg hover:text-white"><li>Home</li></Link>
+                <li className="cursor-pointer">About</li>
                 <li>Features</li>
                 <li>Servey</li>
                 <li>Feedback</li>
@@ -18,13 +19,13 @@ function Footer() {
             </div>
 
             <div className="flex justify-start flex-col">
-              <h1 className=" text-custom-color  pb-4 text-lg">Section</h1>
+              <h1 className=" text-custom-color  pb-4 text-lg">Social Media</h1>
               <ul className=" flex flex-col space-y-2">
-                <li>Home</li>
-                <li>About</li>
-                <li>Features</li>
-                <li>Servey</li>
-                <li>Feedback</li>
+                <li>Facebook</li>
+                <li>Instagram</li>
+                <li>Linkedln</li>
+                <li>Gmail</li>
+                <li>Github</li>
               </ul>
             </div>
 
@@ -46,20 +47,21 @@ function Footer() {
             </h2>
             <p>Monthly digest of what's new and exiting from us </p>
 
-            <form class="flex items-center max-w-lg  mt-[15px]">
+            <form className="flex items-center max-w-lg  mt-[15px]">
               <input
                 type="text"
                 id="voice-search"
-                class="bg-primary border border-primary  text-primary text-base rounded-lg py-1.5 pl-[8px] w-[50%] "
+                className="bg-primary border border-primary  text-primary text-base rounded-lg py-1.5 pl-[8px] w-[50%] "
                 placeholder="Email address"
                 required
               />
 
               <button
                 type="submit"
-                class="inline-flex items-center py-1.5 px-5 ms-2 text-base font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                className="inline-flex items-center py-1.5 px-5 ms-2 text-base font-medium text-white bg-theme rounded-lg   hover:bg-theme focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800
+                hover:scale-105 transition duration-300 ease-in-out cursor-pointer"
               >
-                Search
+                Subscribe
               </button>
             </form>
           </div>

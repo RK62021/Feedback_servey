@@ -1,6 +1,7 @@
 import { asynchandler } from "../utils/asynchandeler.js";
 import { User } from "../models/users.models.js";
 import ApiError from "../utils/ApiError.js";
+import ApiResponse from "../utils/ApiResponse.js";
 
 const generateTokens = async function (UserID) {
   try {
@@ -26,7 +27,7 @@ const signup = asynchandler(async (req, res, next) => {
 
       return next(new ApiError(400, "User already exists"));
     }
-    
+
     const user = await User.create({ name, email, password });
     res.status(201).json({
       id: user._id,
@@ -40,6 +41,7 @@ const signup = asynchandler(async (req, res, next) => {
 
 const login = asynchandler(async (req, res, next) => {
   const { email, password } = req.body;
+  // console.log(email, password);
   const user = await User.findOne({
     email,
   });
@@ -47,14 +49,16 @@ const login = asynchandler(async (req, res, next) => {
     return next(new ApiError(400, "User not found Please signup"));
   }
   const isMatch = await user.isPasswordCorrect(password);
+  // console.log(isMatch);
   const { accessToken, refreshToken } = await generateTokens(user._id);
   if (!isMatch) {
     return next(new ApiError(400, "Invalid password"));
   }
+
   const options = {
     httpOnly: true,
-    sameSite: "none",
-    secure: true,
+    sameSite: "lax",  // ⬅ Use this in development
+    secure: false,    // ⬅ Only true if you're on HTTPS
   };
   res
     .cookie("refreshToken", refreshToken, options)
@@ -72,8 +76,8 @@ const logout = asynchandler(async (req, res, next) => {
     const logoutuser = req.user;
     const options = {
       httpOnly: true,
-      sameSite: "none",
-      secure: true,
+      sameSite: "lax",  // ⬅ Use this in development
+      secure: false,
     };
     const logoutes = await User.findByIdAndUpdate(logoutuser.id, {
       refreshToken: "",
@@ -107,7 +111,7 @@ const userdetails = asynchandler(async (req, res, next) => {
     if (!details) {
       return next(new ApiError(400, "User not found"));
     }
-    res.status(200).json(new response(true, "User details", details));
+    res.status(200).json(new ApiResponse(200, "User details", details));
   } catch (error) {
     return next(new ApiError(500, "Error in getting user details"));
   }
