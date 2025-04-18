@@ -120,4 +120,4 @@ const userdetails = asynchandler(async (req, res, next) => {
 const checkConnection = (req, res)=>{
   res.status(200).send("Connection is ok");
 }
-export { login, signup, logout, userdetails };
+export { login, signup, logout, userdetails, checkConnection };
