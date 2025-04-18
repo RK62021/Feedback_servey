@@ -7,6 +7,42 @@ const [surveys, setSurveys] = useState([]);
 const [responses, setResponses] = useState([]);
 const [selectedSurvey, setSelectedSurvey] = useState('');
 
+useEffect(() => {
+    // Fetch surveys when component mounts
+    const fetchSurveys = async () => {
+        try {
+            const response = await axios.get('http://localhost:3000/api/surveys');
+            setSurveys(response.data);
+        } catch (error) {
+            console.error('Error fetching surveys:', error);
+        }
+    };
+    fetchSurveys();
+}, []);
+
+const handleSurveySelect = async (surveyId) => {
+    setSelectedSurvey(surveyId);
+    if (surveyId) {
+        try {
+            const response = await axios.get(`http://localhost:3000/api/responses/${surveyId}`);
+            setResponses(response.data);
+        } catch (error) {
+            console.error('Error fetching responses:', error);
+        }
+    }
+};
+
+const calculateOptionCounts = (question) => {
+    const counts = {};
+    responses.forEach(response => {
+        const answer = response.answers.find(a => a.questionId === question.id);
+        if (answer) {
+            counts[answer.value] = (counts[answer.value] || 0) + 1;
+        }
+    });
+    return counts;
+};
+
 return (
     <div className="p-6 bg-gray-100 min-h-screen">
         <div className="max-w-4xl mx-auto bg-white shadow-md rounded-lg p-6">

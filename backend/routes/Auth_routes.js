@@ -16,7 +16,7 @@ const router = Router();
 router.route("/signup").post(signupValidation, signup);
 router.route("/login").post(loginValidation, login);
 router.route("/logout").get(verifyJwt, logout);
-router.route("/checkconnection).get(checkConnection);
+router.route("/checkconnection").get(checkConnection);
 
 router.route("/protected").get(verifyJwt, userdetails);
 router.route("/auth-check").get(verifyJwt, (req, res) => {
