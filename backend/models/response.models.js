@@ -23,5 +23,9 @@ const ResponseSchema = mongoose.Schema({
       },
     },
   ],
+  submittedAt: {
+    type: Date,
+    default: Date.now,
+  },
 });
 export const Response = mongoose.model("Response", ResponseSchema);

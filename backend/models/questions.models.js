@@ -6,7 +6,7 @@ const QuestionSchema = mongoose.Schema({
   },
   type: {
     type: String,
-    enum: ["multiple-choice", "text", "rating"],
+    enum: ["multiplechoice", "text", "rating"],
     required: true,
   },
   options: [

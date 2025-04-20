@@ -10,6 +10,7 @@ import Dashboard from "../pages/dashboard";
 import Create from "../components/Create.jsx";
 import User from "../components/User.jsx";
 import Add_del from "../components/Add_Del.jsx";
+
 import {
   Route,
   RouterProvider,
@@ -17,6 +18,7 @@ import {
   createRoutesFromElements,
 } from "react-router-dom";
 import Responses from "../components/Responses.jsx";
+import Response from "../pages/Response.jsx"
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
@@ -36,6 +38,7 @@ const router = createBrowserRouter(
         <Route path="/dashboard/response" element={<Responses/>}></Route>,
       </Route>
       ,
+      <Route path="response/:surveyId" element={<Response/>}></Route>
     </>
   )
 );

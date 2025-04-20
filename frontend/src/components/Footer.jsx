@@ -1,92 +1,199 @@
-import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
+import { FaFacebook, FaInstagram, FaTwitter, FaLinkedin, FaGithub, FaEnvelope } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 function Footer() {
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
+
+  const socialLinks = [
+    { icon: <FaFacebook />, url: "https://facebook.com" },
+    { icon: <FaInstagram />, url: "https://instagram.com" },
+    { icon: <FaLinkedin />, url: "https://linkedin.com" },
+    { icon: <FaGithub />, url: "https://github.com" },
+    { icon: <FaEnvelope />, url: "mailto:contact@example.com" }
+  ];
+
+  const sections = [
+    { name: "Home", path: "/" },
+    { name: "About", path: "/about" },
+    { name: "Features", path: "/features" },
+    { name: "Survey", path: "/survey" },
+    { name: "Feedback", path: "/feedback" }
+  ];
+
   return (
-    <>
-      <footer className=" bg-primary text-primary shadow-top w-full overflow-hidden font-f">
-        <div className=" flex ml-[15px] mt-[20px] w-full  sm:flex-row flex-col justify-between">
-          <div className="grid grid-cols-3 lg:w-[50%] md:w-[50%] w-full  p-4  flex-2">
-            <div className=" justify-start flex-col pl-[15px]">
-              <h1 className=" text-custom-color  pb-4 text-lg">Sections</h1>
-              <ul className=" flex flex-col space-y-2">
-                <Link to="/" className="hover:text-lg hover:text-white"><li>Home</li></Link>
-                <li className="cursor-pointer">About</li>
-                <li>Features</li>
-                <li>Servey</li>
-                <li>Feedback</li>
-              </ul>
+    <footer className="bg-gradient-to-b from-gray-900 to-gray-800 text-gray-300 w-full overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {/* Company Info */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="space-y-4"
+          >
+            <h3 className="text-xl font-bold text-white">Survey System</h3>
+            <p className="text-gray-400">
+              Empowering organizations with powerful survey tools and analytics.
+            </p>
+            <div className="flex space-x-4">
+              {socialLinks.map((social, index) => (
+                <motion.a
+                  key={index}
+                  href={social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.1, y: -5 }}
+                  className="text-gray-400 hover:text-white transition-colors duration-300"
+                  onClick={scrollToTop}
+                >
+                  {social.icon}
+                </motion.a>
+              ))}
             </div>
+          </motion.div>
 
-            <div className="flex justify-start flex-col">
-              <h1 className=" text-custom-color  pb-4 text-lg">Social Media</h1>
-              <ul className=" flex flex-col space-y-2">
-                <li>Facebook</li>
-                <li>Instagram</li>
-                <li>Linkedln</li>
-                <li>Gmail</li>
-                <li>Github</li>
-              </ul>
-            </div>
+          {/* Quick Links */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="space-y-4"
+          >
+            <h3 className="text-xl font-bold text-white">Quick Links</h3>
+            <ul className="space-y-2">
+              {sections.map((section, index) => (
+                <motion.li
+                  key={index}
+                  whileHover={{ x: 5 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
+                  <Link
+                    to={section.path}
+                    className="text-gray-400 hover:text-white transition-colors duration-300"
+                    onClick={scrollToTop}
+                  >
+                    {section.name}
+                  </Link>
+                </motion.li>
+              ))}
+            </ul>
+          </motion.div>
 
-            <div className="flex justify-start flex-col">
-              <h1 className=" text-custom-color  pb-4 text-lg">Section</h1>
-              <ul className=" flex flex-col space-y-2">
-                <li>Home</li>
-                <li>About</li>
-                <li>Features</li>
-                <li>Servey</li>
-                <li>Feedback</li>
-              </ul>
-            </div>
-          </div>
+          {/* Resources */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="space-y-4"
+          >
+            <h3 className="text-xl font-bold text-white">Resources</h3>
+            <ul className="space-y-2">
+              <motion.li whileHover={{ x: 5 }}>
+                <a 
+                  href="#" 
+                  className="text-gray-400 hover:text-white transition-colors duration-300"
+                  onClick={scrollToTop}
+                >
+                  Documentation
+                </a>
+              </motion.li>
+              <motion.li whileHover={{ x: 5 }}>
+                <a 
+                  href="#" 
+                  className="text-gray-400 hover:text-white transition-colors duration-300"
+                  onClick={scrollToTop}
+                >
+                  API Reference
+                </a>
+              </motion.li>
+              <motion.li whileHover={{ x: 5 }}>
+                <a 
+                  href="#" 
+                  className="text-gray-400 hover:text-white transition-colors duration-300"
+                  onClick={scrollToTop}
+                >
+                  Support
+                </a>
+              </motion.li>
+            </ul>
+          </motion.div>
 
-          <div className="  flex-1 w-full md:w-[50%] w-[50%] p-4 ">
-            <h2 className="text-custom-color text-lg">
-              Subscribe to our newsletter
-            </h2>
-            <p>Monthly digest of what's new and exiting from us </p>
-
-            <form className="flex items-center max-w-lg  mt-[15px]">
-              <input
-                type="text"
-                id="voice-search"
-                className="bg-primary border border-primary  text-primary text-base rounded-lg py-1.5 pl-[8px] w-[50%] "
-                placeholder="Email address"
-                required
-              />
-
-              <button
+          {/* Newsletter */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="space-y-4"
+          >
+            <h3 className="text-xl font-bold text-white">Newsletter</h3>
+            <p className="text-gray-400">
+              Subscribe to our newsletter for the latest updates and features.
+            </p>
+            <form className="space-y-3">
+              <div className="relative">
+                <input
+                  type="email"
+                  placeholder="Enter your email"
+                  className="w-full px-4 py-2 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  required
+                />
+              </div>
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
                 type="submit"
-                className="inline-flex items-center py-1.5 px-5 ms-2 text-base font-medium text-white bg-theme rounded-lg   hover:bg-theme focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800
-                hover:scale-105 transition duration-300 ease-in-out cursor-pointer"
+                className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-2 px-4 rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300"
+                onClick={scrollToTop}
               >
                 Subscribe
-              </button>
+              </motion.button>
             </form>
-          </div>
+          </motion.div>
         </div>
 
-        <hr className="h-px mx-auto w-[90%] mt-[5px] bg-gray-600 border-0 dark:bg-gray-700 " />
-
-        <div className="flex items-center justify-between p-6 mx-[15px] pb-6 flex-col sm:flex-row space-y-2 ">
-          <p className="">© 2024 Your Company, Inc. All rights reserved.</p>
-
-          <div className="flex items-center space-x-5 ">
-            <a href="">
-              <FaFacebook className="text-xl hover:text-2xl text-custom-color" />
-            </a>
-
-            <a href="">
-              <FaInstagram className="text-xl hover:text-2xl  text-custom-color" />
-            </a>
-            <a href="">
-              <FaTwitter className="text-xl hover:text-2xl  text-custom-color" />
-            </a>
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="mt-12 pt-8 border-t border-gray-700"
+        >
+          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+            <p className="text-gray-400">
+              © {new Date().getFullYear()} Survey System. All rights reserved.
+            </p>
+            <div className="flex space-x-6">
+              <a 
+                href="#" 
+                className="text-gray-400 hover:text-white transition-colors duration-300"
+                onClick={scrollToTop}
+              >
+                Privacy Policy
+              </a>
+              <a 
+                href="#" 
+                className="text-gray-400 hover:text-white transition-colors duration-300"
+                onClick={scrollToTop}
+              >
+                Terms of Service
+              </a>
+              <a 
+                href="#" 
+                className="text-gray-400 hover:text-white transition-colors duration-300"
+                onClick={scrollToTop}
+              >
+                Cookie Policy
+              </a>
+            </div>
           </div>
-        </div>
-      </footer>
-    </>
+        </motion.div>
+      </div>
+    </footer>
   );
 }
 
