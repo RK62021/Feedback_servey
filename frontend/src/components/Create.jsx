@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { MdTitle, MdDescription, MdDateRange, MdCheck } from "react-icons/md";
 import { motion } from "framer-motion";
-import { toast } from "react-toastify";
+import { toast,ToastContainer } from "react-toastify";
 
 function Create() {
   const { register, handleSubmit, reset, formState: { errors, isSubmitting } } = useForm();
@@ -177,6 +177,7 @@ function Create() {
           </div>
         </div>
       </motion.div>
+      <ToastContainer />
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { motion } from "framer-motion";
-import { toast } from "react-toastify";
+import { toast,ToastContainer } from "react-toastify";
 import { MdAdd, MdDelete, MdQuestionAnswer, MdList, MdCheckBox, MdStarRate, MdTextFields } from "react-icons/md";
 
 function Add_Del() {
@@ -328,6 +328,7 @@ function Add_Del() {
           </div>
         </div>
       </motion.div>
+      <ToastContainer />
     </div>
   );
 }
