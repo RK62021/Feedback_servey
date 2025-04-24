@@ -10,6 +10,7 @@ import Dashboard from "../pages/dashboard";
 import Create from "../components/Create.jsx";
 import User from "../components/User.jsx";
 import Add_del from "../components/Add_Del.jsx";
+import ForgotPassword from "../pages/ForgotPassword.jsx";
 
 import {
   Route,
@@ -39,6 +40,8 @@ const router = createBrowserRouter(
       </Route>
       ,
       <Route path="response/:surveyId" element={<Response/>}></Route>
+      <Route path="/forgot-password" element={<ForgotPassword />}></Route>
+
     </>
   )
 );
