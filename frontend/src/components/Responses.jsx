@@ -15,7 +15,7 @@ import {
 } from 'chart.js';
 import { MdBarChart, MdPieChart, MdShowChart, MdDownload } from 'react-icons/md';
 import { motion } from 'framer-motion';
-
+import { saveAs } from 'file-saver';
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -39,6 +39,31 @@ function Responses() {
   useEffect(() => {
     fetchSurveys();
   }, []);
+
+  const exportData = () => {
+    const dataToExport = responses.map(response => ({
+      surveyId: selectedSurvey,
+      question: response.answer.map(ans => ans.questionid.text),
+      answer: response.answer.map(ans => ans.answer),
+    }));
+
+    const blob = new Blob([JSON.stringify(dataToExport, null, 2)], { type: 'application/json' });
+    saveAs(blob, 'survey-responses.json');
+  };
+  const exportDataAsText = () => {
+    let textData = `Survey ID: ${selectedSurvey}\n\nResponses:\n`;
+  
+    responses.forEach((response, index) => {
+      textData += `Response ${index + 1}:\n`;
+      response.answer.forEach(ans => {
+        textData += `Question: ${ans.questionid.text}\nAnswer: ${ans.answer}\n\n`;
+      });
+    });
+  
+    const blob = new Blob([textData], { type: 'text/plain;charset=utf-8' });
+    saveAs(blob, 'survey-responses.txt');
+  };
+  
 
   const fetchSurveys = async () => {
     try {
@@ -254,7 +279,7 @@ function Responses() {
                 <div className="flex justify-end mt-8">
                   <button
                     className="flex items-center px-6 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition duration-200"
-                    onClick={() => {/* Export logic */}}
+                    onClick={exportDataAsText}
                   >
                     <MdDownload className="mr-2" />
                     Export Data

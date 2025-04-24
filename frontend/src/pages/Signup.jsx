@@ -25,6 +25,16 @@ function Signup() {
         },
         body: JSON.stringify(data),
       });
+      // const response2 = await fetch("http://localhost/PHP%20scripts/BackendPHP/controller/Signup_api.php", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify(data),
+      // });
+      // const result2 = await response2.json();
+      // console.log(result2);
+      
 
       if (response.ok) {
         toast.success("Account created successfully! Redirecting to login...", {
