@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import useri from "../assets/user.svg";
 import { MdEdit, MdLock, MdEmail, MdPerson } from "react-icons/md";
+import { Link } from "react-router-dom";
+import { LiaLinkedinIn } from "react-icons/lia";
 
 function User() {
   const [user, setUser] = useState("");
@@ -116,10 +118,10 @@ function User() {
                 <MdEdit className="mr-2 text-xl" />
                 Edit Profile
               </button>
-              <button className="flex items-center justify-center px-6 py-3 bg-gradient-to-r from-purple-500 to-purple-600 text-white rounded-xl hover:from-purple-600 hover:to-purple-700 transition duration-300 transform hover:scale-105 shadow-md">
+              <Link  to={"/change-password"} className="flex items-center justify-center px-6 py-3 bg-gradient-to-r from-purple-500 to-purple-600 text-white rounded-xl hover:from-purple-600 hover:to-purple-700 transition duration-300 transform hover:scale-105 shadow-md">
                 <MdLock className="mr-2 text-xl" />
                 Change Password
-              </button>
+              </Link>
             </div>
           </div>
         </div>
