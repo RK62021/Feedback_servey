@@ -3,9 +3,16 @@ import { useForm } from "react-hook-form";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 function ChangePassword() {
-  const { register, handleSubmit, reset, formState: { errors } } = useForm();
+  const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
   const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit = async (data) => {
@@ -15,27 +22,36 @@ function ChangePassword() {
       });
       return;
     }
-
+    console.log(data);
     setIsLoading(true);
     try {
-      const response = await fetch("http://localhost:8080/api/v1/auth/change-password", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          currentPassword: data.currentPassword,
-          newPassword: data.newPassword,
-        }),
-      });
+      const response = await fetch(
+        "http://localhost:8080/api/v1/auth/change-password",
+        {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            currentPassword: data.currentPassword,
+            newPassword: data.newPassword,
+          }),
+        }
+      );
+      const result = await response.json();
+      console.log(result);
 
       if (response.ok) {
         toast.success("Password changed successfully!", {
           autoClose: 3000,
           position: "top-center",
         });
+        reset();
+
+        navigate("/dashboard");
       } else {
-        toast.error("Failed to change password. Please try again.", {
+        toast.error(`${result.error}` + ". Please try again.", {
           position: "top-center",
         });
       }
@@ -46,7 +62,6 @@ function ChangePassword() {
       });
     } finally {
       setIsLoading(false);
-      reset();
     }
   };
 
@@ -85,7 +100,9 @@ function ChangePassword() {
                 })}
               />
               {errors.currentPassword && (
-                <p className="mt-1 text-sm text-red-600">{errors.currentPassword.message}</p>
+                <p className="mt-1 text-sm text-red-600">
+                  {errors.currentPassword.message}
+                </p>
               )}
             </div>
 
@@ -112,7 +129,9 @@ function ChangePassword() {
                 })}
               />
               {errors.newPassword && (
-                <p className="mt-1 text-sm text-red-600">{errors.newPassword.message}</p>
+                <p className="mt-1 text-sm text-red-600">
+                  {errors.newPassword.message}
+                </p>
               )}
             </div>
 
@@ -135,7 +154,9 @@ function ChangePassword() {
                 })}
               />
               {errors.confirmPassword && (
-                <p className="mt-1 text-sm text-red-600">{errors.confirmPassword.message}</p>
+                <p className="mt-1 text-sm text-red-600">
+                  {errors.confirmPassword.message}
+                </p>
               )}
             </div>
           </div>

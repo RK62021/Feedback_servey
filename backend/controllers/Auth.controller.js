@@ -120,4 +120,25 @@ const userdetails = asynchandler(async (req, res, next) => {
 const checkConnection = (req, res)=>{
   res.status(200).send("Connection is ok");
 }
-export { login, signup, logout, userdetails, checkConnection };
+const changePassword = asynchandler(async (req, res, next) => {
+  try{
+    const user = req.user;
+    console.log(user);
+    const {currentPassword, newPassword } = req.body;
+    const userDetails = await User.findById(user.id).select("+password");
+    if (!userDetails) {
+      return next(new ApiError(400, "User not found"));
+    }
+    const isMatch = await userDetails.isPasswordCorrect(currentPassword);
+    
+    if (!isMatch) {
+      return next(new ApiError(400, "Invalid password"));
+    }
+    userDetails.password = newPassword;
+    await userDetails.save({ validateBeforeSave: false });
+    res.status(200).json(new ApiResponse(200, "Password changed successfully", {}));
+  }catch (error) {
+    return next(new ApiError(500, "Error in changing password"));
+  }
+});
+export { login, signup, logout, userdetails, checkConnection ,changePassword };
