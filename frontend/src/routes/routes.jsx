@@ -6,7 +6,7 @@ import Serveys from "../pages/serveys.jsx";
 import Home from "../pages/Home.jsx";
 import About from "../pages/About.jsx";
 import Feature from "../pages/Feature.jsx";
-import Dashboard from "../pages/dashboard";
+import Dashboard from "../pages/Dashboard";
 import Create from "../components/Create.jsx";
 import User from "../components/User.jsx";
 import Add_del from "../components/Add_Del.jsx";
